@@ -1,11 +1,18 @@
 import { useState } from 'react';
 import Button from '../../ui/Button';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { updateName } from './userSlice';
 
 function CreateUser() {
   const [username, setUsername] = useState('');
-
+const navigate=useNavigate()
+const dispatch=useDispatch()
+  
   function handleSubmit(e) {
     e.preventDefault();
+    dispatch({type:updateName,payload:username})
+    navigate("/menu")
   }
 
   return (
@@ -14,7 +21,7 @@ function CreateUser() {
 
       <input
         type="text"
-        placeholder="Your full name"
+        placeholder="Your full name example(H.G)"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
         className='w-72 input mb-8'
